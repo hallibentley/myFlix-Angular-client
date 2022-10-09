@@ -25,6 +25,7 @@ import { EditUserFormComponent } from './edit-user-form/edit-user-form.component
 import { GenreComponent } from './genre/genre.component';
 import { DirectorComponent } from './director/director.component';
 import { SynopsisComponent } from './synopsis/synopsis.component';
+import { NavBarComponent } from './navbar/navbar.component';
 
 
 
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
     EditUserFormComponent,
     GenreComponent,
     DirectorComponent,
-    SynopsisComponent
+    SynopsisComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,13 +1,14 @@
+<app-navbar></app-navbar>
 <div style="display: flex;">
   <mat-card>
     <mat-card-header style="height: 100px">
-      <mat-card-title>{{userData.username}}'s Profile</mat-card-title>
+      <mat-card-title>{{userData.Username}}'s Profile</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p>Username: {{userData.username}}</p>
-      <p>Email: {{userData.email}}</p>
-      <p>Password: {{userData.password}}</p>
-      <p>Birthday: {{userData.birthday}}</p>
+      <p>Username: {{userData.Username}}</p>
+      <p>Email: {{userData.Email}}</p>
+      <p>Password: {{userData.Password}}</p>
+      <p>Birthday: {{userData.Birthday}}</p>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button (click)="editUserDialog()" color="primary">Edit</button>
