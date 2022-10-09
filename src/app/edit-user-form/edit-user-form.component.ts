@@ -30,7 +30,7 @@ export class EditUserFormComponent implements OnInit {
       this.snackBar.open("User data has been updated!  Please login again with your new credentials", "OK", {
         duration: 2000
       });
-      this.router.navigate(["welcome"]);
+      this.router.navigate(["movies"]);
     });
   }
 
