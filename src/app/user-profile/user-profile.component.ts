@@ -12,6 +12,9 @@ import { Router } from "@angular/router";
 })
 export class UserProfileComponent implements OnInit {
   userData: any = {};
+  movies: any[] = []
+  FavoriteMovies: any[] = []
+
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
@@ -21,6 +24,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserData();
+    this.getMovies();
   }
 
   getUserData(): void {
@@ -30,7 +34,17 @@ export class UserProfileComponent implements OnInit {
       console.log(this.userData);
       return this.userData;
     });
+  };
+
+
+  getMovies(): void {
+    this.fetchApiData.getMovies().subscribe((resp: any) => {
+      this.movies = resp;
+      console.log(this.movies);
+      return this.movies;
+    });
   }
+
 
   editUserDialog(): void {
     this.dialog.open(EditUserFormComponent, {
@@ -53,5 +67,44 @@ export class UserProfileComponent implements OnInit {
       });
     }
   }
+
+
+
+  toggleFavorite(id: any): void {
+    console.log("add or remove favorite");
+    if (this.FavoriteMovies.indexOf(id) > -1) {
+      this.deleteFavorite(id);
+    } else {
+      this.addFavorite(id);
+    }
+    // check current icon value
+    // if in favorites list, call removeFavorite and set icon to favorite_border
+    // if not in favorites list, call addFavorite and set icon to favorite
+  }
+
+  addFavorite(id: any): void {
+    const username = localStorage.getItem("user") || "";
+    this.fetchApiData.addFavorite(id, username).subscribe((resp: any) => {
+      console.log(resp);
+      // add to favorite list
+      this.FavoriteMovies.push(id);
+      console.log(this.FavoriteMovies);
+      // change icon
+    });
+  }
+
+  deleteFavorite(id: any): void {
+    const username = localStorage.getItem("user") || "";
+    this.fetchApiData.deleteFavorite(username, id).subscribe((resp: any) => {
+      console.log(resp);
+      // remove from favorite list
+      this.FavoriteMovies = this.FavoriteMovies.filter(movie => movie !== id);
+      console.log(this.FavoriteMovies);
+      // change icon
+    });
+  }
+
+
+
 
 }

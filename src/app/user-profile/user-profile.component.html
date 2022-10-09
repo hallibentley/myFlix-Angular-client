@@ -1,6 +1,10 @@
 <app-navbar></app-navbar>
 <div style="display: flex;">
+
+
   <mat-card>
+
+    <!--user profile info-->
     <mat-card-header style="height: 100px">
       <mat-card-title>{{userData.Username}}'s Profile</mat-card-title>
     </mat-card-header>
@@ -10,9 +14,39 @@
       <p>Password: {{userData.Password}}</p>
       <p>Birthday: {{userData.Birthday}}</p>
     </mat-card-content>
+
+    <!--edit/delete user profile-->
     <mat-card-actions>
-      <button mat-raised-button (click)="editUserDialog()" color="primary">Edit</button>
-      <button mat-raised-button (click)="deleteUser()" color="warn">Delete</button>
+      <button mat-raised-button (click)="editUserDialog()" color="primary">Edit profile</button>
+      <button mat-raised-button (click)="deleteUser()" color="warn">Delete profile</button>
     </mat-card-actions>
+
+    <mat-card-header style="height: 100px">
+      <mat-card-title>{{userData.Username}}'s Movies</mat-card-title>
+    </mat-card-header>
+
+    <div style="display: flex;">
+      <mat-card *ngFor="let movie of movies; let i=index;" style="flex: 1 1 auto;">
+        <mat-card-header style="height: 100px">
+          <mat-card-title>{{movie.Title}}</mat-card-title>
+          <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+        </mat-card-header>
+        <img style="height: 400px" src={{movie.ImagePath}} />
+        <mat-card-actions>
+          <mat-icon *ngIf="FavoriteMovies.indexOf(movie._id) == -1" (click)="toggleFavorite(movie._id)">favorite_border
+          </mat-icon>
+          <mat-icon *ngIf="FavoriteMovies.indexOf(movie._id) > -1" (click)="toggleFavorite(movie._id)">favorite
+          </mat-icon>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+
   </mat-card>
+
+
+
+
+
+
 </div>
