@@ -25,6 +25,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getUserData();
     this.getMovies();
+    this.getFavoriteMovies();
   }
 
   getUserData(): void {
@@ -35,6 +36,23 @@ export class UserProfileComponent implements OnInit {
       return this.userData;
     });
   };
+
+  getFavoriteMovies(): void {
+    this.fetchApiData.getMovies().subscribe((resp: any) => {
+      this.movies = resp;
+
+      this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
+        this.FavoriteMovies = resp.FavoriteMovies;
+        this.movies.forEach((movie) => {
+          if (this.FavoriteMovies.some((id) => id === movie._id)) {
+            this.FavoriteMovies.push(movie);
+          }
+        });
+        console.log(this.FavoriteMovies);
+      });
+    });
+  }
+
 
 
   getMovies(): void {

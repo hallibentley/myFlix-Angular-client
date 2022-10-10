@@ -26,10 +26,9 @@
     </mat-card-header>
 
     <div style="display: flex;">
-      <mat-card *ngFor="let movie of movies; let i=index;" style="flex: 1 1 auto;">
+      <mat-card *ngFor="let movie of FavoriteMovies; let i=index;" style="flex: 1 auto;">
         <mat-card-header style="height: 100px">
           <mat-card-title>{{movie.Title}}</mat-card-title>
-          <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
         </mat-card-header>
         <img style="height: 400px" src={{movie.ImagePath}} />
         <mat-card-actions>
@@ -44,9 +43,12 @@
 
   </mat-card>
 
-
-
-
-
-
 </div>
+
+
+
+
+
+
+
+<!-- <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle> -->
