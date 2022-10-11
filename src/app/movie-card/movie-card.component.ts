@@ -25,6 +25,11 @@ export class MovieCardComponent {
     this.getMovies();
   }
 
+  /**
+   * Called on load - calls API method to get movie data
+   * @returns movie data
+   */
+
   getMovies(): void {
     this.fetchApiData.getMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -32,6 +37,12 @@ export class MovieCardComponent {
       return this.movies;
     });
   }
+
+  /**
+   * Opens dialog with genre details
+   * @param name 
+   * @param description 
+   */
 
   openGenreDialog(name: string, description: string): void {
     this.dialog.open(GenreComponent, {
@@ -43,6 +54,12 @@ export class MovieCardComponent {
     })
   }
 
+  /**
+   * Opens dialog with director details 
+   * @param name
+   * @param description 
+   */
+
   openDirectorDialog(name: string, description: string): void {
     this.dialog.open(DirectorComponent, {
       data: {
@@ -53,6 +70,11 @@ export class MovieCardComponent {
     })
   }
 
+  /**
+   * Opens dialog with movie description
+   * @param description - of movie
+   */
+
   openSynopsisDialog(description: string): void {
     this.dialog.open(SynopsisComponent, {
       data: {
@@ -61,6 +83,11 @@ export class MovieCardComponent {
       width: "500px"
     })
   }
+
+  /**
+     * Calls function to add or remove movie from favorites as appropriate
+     * @param id - movie ID
+     */
 
   toggleFavorite(id: any): void {
     console.log("add or remove favorite");
@@ -74,6 +101,11 @@ export class MovieCardComponent {
     // if not in favorites list, call addFavorite and set icon to favorite
   }
 
+  /**
+    * Adds movie to favorites
+    * @param id - movie ID
+    */
+
   addFavorite(id: any): void {
     const username = localStorage.getItem("user") || "";
     this.fetchApiData.addFavorite(id, username).subscribe((resp: any) => {
@@ -84,6 +116,11 @@ export class MovieCardComponent {
       // change icon
     });
   }
+
+  /**
+   * Deletes move from favorites
+   * @param id - movie ID
+   */
 
   deleteFavorite(id: any): void {
     const username = localStorage.getItem("user") || "";
